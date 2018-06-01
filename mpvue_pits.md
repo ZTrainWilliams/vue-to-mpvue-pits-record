@@ -28,23 +28,23 @@
 ### scroll-view 滚动出现警告
 	警告：Do not have scroll handler in current page: pages/index/main. Please make sure that scroll handler has been defined in pages/index/main, or pages/index/main has been added into app.json
 	原因：滚动方法未用 @ 在template内声明
-```vue
-	<scroll-view :scroll-top="scrollTop" scroll-y="true" :style="'height:'+scrollHeight+'px;'" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll"></scroll-view>
-	<scroll-view :scroll-top="scrollTop" scroll-y="true" :style="'height:'+scrollHeight+'px;'" class="list" @scrolltolower="DownLoad" @scrolltoupper="topLoad" @scroll="scroll"></scroll-view>
-```vue
+	```vue
+		<scroll-view :scroll-top="scrollTop" scroll-y="true" :style="'height:'+scrollHeight+'px;'" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll"></scroll-view>
+		<scroll-view :scroll-top="scrollTop" scroll-y="true" :style="'height:'+scrollHeight+'px;'" class="list" @scrolltolower="DownLoad" @scrolltoupper="topLoad" @scroll="scroll"></scroll-view>
+	```vue
 	scrollTop、scrollHeight都必须设置，scrollHeight不能使用%，可以通过以下方式获取设置适应高度
-```js
-	var query = wx.createSelectorQuery();
-	query.select('.item_tab').boundingClientRect();
-	query.exec(function (r) {
-		var h = r[0].height;
-		wx.getSystemInfo({
-			success:function(res){
-				that.scrollHeight = res.windowHeight - h;
-			}
-		});
-	})
-```js
+	```js
+		var query = wx.createSelectorQuery();
+		query.select('.item_tab').boundingClientRect();
+		query.exec(function (r) {
+			var h = r[0].height;
+			wx.getSystemInfo({
+				success:function(res){
+					that.scrollHeight = res.windowHeight - h;
+				}
+			});
+		})
+	```js
 
 ### scroll-view 绑定scroll事件，反复滚动容易造成抖动问题
 
